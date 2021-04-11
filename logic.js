@@ -43,8 +43,22 @@ d3.json(queryUrl).then(function(data) {
         "radius": feature.properties.mag * 5,
         "opacity": 0.65    
       }
-    }  
-  })
+    };
+    
+    // Create a legend to display information about our map
+    var legend = L.control({ position: "bottomright" });
+    
+    // When the layer control is added, insert a div with the class of "legend"
+    legend.onAdd = function () {  
+      var div = L.DomUtil.create("div", "legend"),
+      color = getColor(feature.geometry.coordinates[2]);
+      console.log(color);
+      
+      return div;
+
+    // Add the info legend to the map
+    info.addTo(myMap)
+  });
 
   // Define streetmap and darkmap layers
   var streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
@@ -88,24 +102,24 @@ d3.json(queryUrl).then(function(data) {
   }).addTo(myMap);
 
   // Set up the legend
-  var legend = L.control({ position: "bottomright" });
-  legend.onAdd = function (map) {
+  // var legend = L.control({ position: "bottomright" });
+  // legend.onAdd = function () {
 
-    var div = L.DomUtil.create('div', 'info legend'),
-      depth = L.geoJSON(data.features.feature.geometry.coordinates[2])
-      colors = L.geoJSON(data.features.properties.mag)
+  //   var div = L.DomUtil.create('div', 'legend'),
+  //     //depth = L.geoJSON(data.features.feature.geometry.coordinates[2])
+  //     color = getColor(feature.geometry.coordinates[2]);
+  //     console.log(color);
+  //   // loop through our density intervals and generate a label with a colored square for each interval
+  //   // for (var i = 0; i < colors.length; i++) {
+  //   //   div.innerHTML +=
+  //   //       '<i style="background:' + getColor(colors + 1) + '"></i> ' +
+  //   //       colors[i] + (colors[i + 1] ? '&ndash;' + colors[i + 1] + '<br>' : '+');
+  //   // }
 
-    // loop through our density intervals and generate a label with a colored square for each interval
-    for (var i = 0; i < depth.length; i++) {
-      div.innerHTML +=
-          '<i style="background:' + getColor(depth + 1) + '"></i> ' +
-          depth[i] + (depth[i + 1] ? '&ndash;' + depth[i + 1] + '<br>' : '+');
-    }
-
-    return div;
-  };
+  //   return div;
+  // };
  
-   // Adding legend to the map
-   legend.addTo(myMap);
+  //  // Adding legend to the map
+  //  legend.addTo(myMap);
 
 });
