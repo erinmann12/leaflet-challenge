@@ -43,22 +43,9 @@ d3.json(queryUrl).then(function(data) {
         "radius": feature.properties.mag * 5,
         "opacity": 0.65    
       }
-    };
-    
-    // Create a legend to display information about our map
-    var legend = L.control({ position: "bottomright" });
-    
-    // When the layer control is added, insert a div with the class of "legend"
-    legend.onAdd = function () {  
-      var div = L.DomUtil.create("div", "legend"),
-      color = getColor(feature.geometry.coordinates[2]);
-      console.log(color);
+    }
       
-      return div;
-
-    // Add the info legend to the map
-    info.addTo(myMap)
-  });
+  })
 
   // Define streetmap and darkmap layers
   var streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
