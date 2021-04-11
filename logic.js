@@ -26,6 +26,7 @@ d3.json(queryUrl).then(function(data) {
   function onEachFeature(feature, layer) {
     layer.bindPopup(`${feature.properties.place}<hr>Magnitude:${feature.properties.mag}<br>Depth:${feature.geometry.coordinates[2]}`);
   }
+  
 
   var earthquakes = L.geoJSON(data.features, {
     onEachFeature: onEachFeature,
@@ -44,7 +45,6 @@ d3.json(queryUrl).then(function(data) {
         "opacity": 0.65    
       }
     }
-      
   })
 
   // Define streetmap and darkmap layers
@@ -88,25 +88,26 @@ d3.json(queryUrl).then(function(data) {
     collapsed: false
   }).addTo(myMap);
 
+  console.log(earthquakes);
   // Set up the legend
-  // var legend = L.control({ position: "bottomright" });
-  // legend.onAdd = function () {
+  var legend = L.control({ position: "bottomright" });
+  legend.onAdd = function () {
 
-  //   var div = L.DomUtil.create('div', 'legend'),
-  //     //depth = L.geoJSON(data.features.feature.geometry.coordinates[2])
-  //     color = getColor(feature.geometry.coordinates[2]);
-  //     console.log(color);
-  //   // loop through our density intervals and generate a label with a colored square for each interval
-  //   // for (var i = 0; i < colors.length; i++) {
-  //   //   div.innerHTML +=
-  //   //       '<i style="background:' + getColor(colors + 1) + '"></i> ' +
-  //   //       colors[i] + (colors[i + 1] ? '&ndash;' + colors[i + 1] + '<br>' : '+');
-  //   // }
+    var div = L.DomUtil.create('div', 'legend'),
+      color = ["#2c99ea", "#2ceabf", "#92ea2c", "#d5ea2c","#eaa92c", "#ea2c2c"]
+      steps = [0, 5, 10, 15];
+      
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < steps.length; i++) {
+      div.innerHTML +=
+          '<i style="background:' + getColor(color[i] + 1) + '"></i> ' +
+          steps[i] + (steps[i + 1] ? '&ndash;' + steps[i + 1] + '<br>' : '+');
+    }
 
-  //   return div;
-  // };
+    return div;
+  };
  
-  //  // Adding legend to the map
-  //  legend.addTo(myMap);
+   // Adding legend to the map
+  legend.addTo(myMap);
 
 });
