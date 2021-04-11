@@ -87,25 +87,25 @@ d3.json(queryUrl).then(function(data) {
     collapsed: false
   }).addTo(myMap);
 
-  // Create Legend
-  var legend = L.control({position: 'bottomright'});
-
+  // Set up the legend
+  var legend = L.control({ position: "bottomright" });
   legend.onAdd = function (map) {
 
-      var div = L.DomUtil.create('div', 'info legend'),
-          grades = [0, 10, 20, 50, 100, 200, 500, 1000],
-          labels = [];
+    var div = L.DomUtil.create('div', 'info legend'),
+      depth = L.geoJSON(data.features.feature.geometry.coordinates[2])
+      colors = L.geoJSON(data.features.properties.mag)
 
-      // loop through our density intervals and generate a label with a colored square for each interval
-      for (var i = 0; i < grades.length; i++) {
-          div.innerHTML +=
-              '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-              grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-      }
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < depth.length; i++) {
+      div.innerHTML +=
+          '<i style="background:' + getColor(depth + 1) + '"></i> ' +
+          depth[i] + (depth[i + 1] ? '&ndash;' + depth[i + 1] + '<br>' : '+');
+    }
 
-      return div;
+    return div;
   };
-
-  legend.addTo(myMap);
+ 
+   // Adding legend to the map
+   legend.addTo(myMap);
 
 });
