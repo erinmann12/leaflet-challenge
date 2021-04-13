@@ -16,11 +16,11 @@ d3.json(queryUrl).then(function(data) {
     if (depth > 15)
       return "red"
     else if (depth > 10)
-      return "orange"
+      return "green"
     else if (depth > 5)
       return "orange"
     else
-      return "green";
+      return "yellow";
   }
 
   function onEachFeature(feature, layer) {
@@ -90,22 +90,26 @@ d3.json(queryUrl).then(function(data) {
 
   console.log(earthquakes);
   // Set up the legend
-  var legend = L.control({ position: "bottomright" });
-  legend.onAdd = function () {
+  var legend = L.control({position: 'bottomright'});
 
-    var div = L.DomUtil.create('div', 'legend'),
-      color = ["#2c99ea", "#2ceabf", "#92ea2c", "#d5ea2c","#eaa92c", "#ea2c2c"]
-      steps = [0, 5, 10, 15];
-      
+legend.onAdd = function (map) {
+  
+    var div = L.DomUtil.create('div', 'info legend'),
+        grades = [0, 5, 10, 15],
+        colors = ["red","green","orange","yellow"];
+
+
     // loop through our density intervals and generate a label with a colored square for each interval
-    for (var i = 0; i < steps.length; i++) {
-      div.innerHTML +=
-          '<i style="background:' + getColor(color[i] + 1) + '"></i> ' +
-          steps[i] + (steps[i + 1] ? '&ndash;' + steps[i + 1] + '<br>' : '+');
+    for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + color[i] + '"></i> ' +
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
     }
 
     return div;
-  };
+};
+
+legend.addTo(map);
  
    // Adding legend to the map
   legend.addTo(myMap);
