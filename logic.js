@@ -14,13 +14,13 @@ d3.json(queryUrl).then(function(data) {
 
 //     //Use if/else if etc on depth to change colors
     if (depth > 15)
-      return "red"
+      return "#B22222"
     else if (depth > 10)
-      return "green"
+      return "#006400"
     else if (depth > 5)
-      return "orange"
+      return "#FF8C00"
     else
-      return "yellow";
+      return "#FFC0CB";
   }
 
   function onEachFeature(feature, layer) {
@@ -88,7 +88,7 @@ d3.json(queryUrl).then(function(data) {
     collapsed: false
   }).addTo(myMap);
 
-  console.log(earthquakes);
+  //console.log(earthquakes);
   // Set up the legend
   var legend = L.control({position: 'bottomright'});
 
@@ -96,20 +96,18 @@ legend.onAdd = function (map) {
   
     var div = L.DomUtil.create('div', 'info legend'),
         grades = [0, 5, 10, 15],
-        colors = ["red","green","orange","yellow"];
+        colors = ["#B22222","#006400","#FF8C00","#FFC0CB"];
 
 
     // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
         div.innerHTML +=
-            '<i style="background:' + color[i] + '"></i> ' +
+            '<i style="background:' + colors[i] + '"></i> ' +
             grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
     }
 
     return div;
 };
-
-legend.addTo(map);
  
    // Adding legend to the map
   legend.addTo(myMap);
