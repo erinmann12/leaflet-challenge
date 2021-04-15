@@ -21,3 +21,6 @@ First I visited the USGS GeoJSON feed page and chose a data set to visualize. Us
 ![](https://github.com/erinmann12/leaflet-challenge/blob/main/images/mapwithpopup.PNG)
 
 If a user clicks on a data point, a popup will appear to provide more information like the location of the earthquake, the magnitude, and the depth. I also created a legend to provide context for the map data.
+
+The user can also view a dark map or a street map of the data. 
+
