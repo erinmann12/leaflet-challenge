@@ -24,3 +24,10 @@ If a user clicks on a data point, a popup will appear to provide more informatio
 
 The user can also view a dark map or a street map of the data. 
 
+![](https://github.com/erinmann12/leaflet-challenge/blob/main/images/darkmap.PNG)
+
+------------------------------------------------------------------------------------------------------------------
+
+Erin Mann
+
+erin.mann2019@gmail.com
