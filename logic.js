@@ -95,15 +95,15 @@ d3.json(queryUrl).then(function(data) {
 legend.onAdd = function (map) {
   
     var div = L.DomUtil.create('div', 'info legend'),
-        grades = [0, 5, 10, 15],
+        depths = [0, 5, 10, 15],
         colors = ["#B22222","#006400","#FF8C00","#FFC0CB"];
 
 
     // loop through our density intervals and generate a label with a colored square for each interval
-    for (var i = 0; i < grades.length; i++) {
+    for (var i = 0; i < depths.length; i++) {
         div.innerHTML +=
             '<i style="background:' + colors[i] + '"></i> ' +
-            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+            depths[i] + (depths[i + 1] ? '&ndash;' + depths[i + 1] + '<br>' : '+');
     }
 
     return div;
