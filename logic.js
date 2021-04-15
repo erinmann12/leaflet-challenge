@@ -92,6 +92,7 @@ d3.json(queryUrl).then(function(data) {
   legend.onAdd = function (map) {
   
     var div = L.DomUtil.create('div', 'info legend'),
+        labels = [`<strong>Depth</strong>`]
         depths = [0, 5, 10, 15],
         colors = ["#B22222","#006400","#FF8C00","#FFC0CB"];
 
@@ -99,10 +100,11 @@ d3.json(queryUrl).then(function(data) {
     // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < depths.length; i++) {
         div.innerHTML +=
+        labels.push(
             '<i style="background:' + colors[i] + '"></i> ' +
-            depths[i] + (depths[i + 1] ? '&ndash;' + depths[i + 1] + '<br>' : '+');
+            depths[i] + (depths[i + 1] ? '&ndash;' + depths[i + 1] + '<br>' : '+'));
     }
-
+    div.innerHTML = labels.join(`<br>`);
     return div;
   };
  
