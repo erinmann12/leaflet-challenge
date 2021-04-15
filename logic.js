@@ -1,7 +1,4 @@
 // Store our API endpoint as queryUrl
-// var queryUrl = "http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2014-01-01&endtime=" +
-//   "2014-01-02&maxlongitude=-69.52148437&minlongitude=-123.83789062&maxlatitude=48.74894534&minlatitude=25.16517337";
-
 var queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojson"
 // console.log(queryUrl);
 
@@ -92,7 +89,7 @@ d3.json(queryUrl).then(function(data) {
   // Set up the legend
   var legend = L.control({position: 'bottomright'});
 
-legend.onAdd = function (map) {
+  legend.onAdd = function (map) {
   
     var div = L.DomUtil.create('div', 'info legend'),
         depths = [0, 5, 10, 15],
@@ -107,7 +104,7 @@ legend.onAdd = function (map) {
     }
 
     return div;
-};
+  };
  
    // Adding legend to the map
   legend.addTo(myMap);
